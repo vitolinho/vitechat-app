@@ -1,19 +1,20 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import Header from './components/header/header'
+import talk from './DATA/talk.json'
 
 export default function App() {
+  const receiptInfos = talk[2] as { id: number; num: string; picture: string };
   return (
     <View style={styles.container}>
-      <Text>bonjour jé suis nle</Text>
+      <Header profile_picture={receiptInfos.picture} num={receiptInfos.num}/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    backgroundColor: "#F8F8FC"
   },
 });
