@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import Header from './components/header/header'
+import Form from './components/form/form'
 import talk from './DATA/talk.json'
 
 export default function App() {
@@ -8,6 +9,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Header profile_picture={receiptInfos.picture} num={receiptInfos.num}/>
+      <Form/>
     </View>
   );
 }
