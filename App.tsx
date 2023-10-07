@@ -1,5 +1,6 @@
-import React,{ useState } from 'react'
+import React,{ useState, useEffect } from 'react'
 import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import Header from './components/header/header'
 import Message from './components/message/message'
 import talk from './DATA/talk.json'
@@ -12,41 +13,68 @@ export default function App() {
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState("")
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (newMessage) {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          content: newMessage,
-          num: userTel.num,
-        },
-      ]);
-      setNewMessage("");
-      const answers = [
-        "Salut !",
-        "ça va ?",
-        "Tu fais quoi ?",
-        "Parfait !",
-        "OK !",
-      ];
-      const randomIndex = Math.floor(Math.random() * answers.length);
-      const randomAnswer = answers[randomIndex];
-      setTimeout(() => {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          {
+      const newMessageObj = {
+        content: newMessage,
+        num: userTel.num,
+      };
+      try {
+        const existingMessages = await AsyncStorage.getItem('messages');
+        const parsedMessages = existingMessages ? JSON.parse(existingMessages) : [];
+        parsedMessages.push(newMessageObj);
+        await AsyncStorage.setItem('messages', JSON.stringify(parsedMessages));
+        setMessages((prevMessages) => [...prevMessages, newMessageObj]);
+        setNewMessage("");
+        const answers = [
+          "Salut !",
+          "ça va ?",
+          "Tu fais quoi ?",
+          "Parfait !",
+          "OK !",
+        ];
+        const randomIndex = Math.floor(Math.random() * answers.length);
+        const randomAnswer = answers[randomIndex];
+        
+        setTimeout(() => {
+          const randomAnswerObj = {
             content: randomAnswer,
             num: receiptInfos.num,
-          },
-        ]);
-      }, 2000);
+          };
+          parsedMessages.push(randomAnswerObj);
+          AsyncStorage.setItem('messages', JSON.stringify(parsedMessages));
+          setMessages((prevMessages) => [...prevMessages, randomAnswerObj]);
+        }, 2000);
+      } catch (error) {
+        console.error('Erreur lors de la sauvegarde des messages : ', error);
+      }
     }
   };
-  const deleteMessage = (index) => {
-    const updatedMessages = [...messages]
-    updatedMessages.splice(index, 1)
-    setMessages(updatedMessages)
+  const deleteMessage = async (index: number) => {
+    try {
+      const existingMessages = await AsyncStorage.getItem('messages');
+      if (existingMessages) {
+        const parsedMessages = JSON.parse(existingMessages);
+        if (index >= 0 && index < parsedMessages.length) {
+          parsedMessages.splice(index, 1);
+          await AsyncStorage.setItem('messages', JSON.stringify(parsedMessages));
+          setMessages(parsedMessages);
+        }
+      }
+    } catch (error) {
+      console.error('Erreur lors de la suppression du message : ', error);
+    }
+  };
+
+  const getSavedData = async () => {
+    const existingMessages = await AsyncStorage.getItem('messages');
+    const parsedMessages = existingMessages ? JSON.parse(existingMessages) : [];
+    setMessages(parsedMessages)
   }
+
+  useEffect(() => {
+    getSavedData()
+  }, []);
   return (
     <View style={styles.container}>
       <Header profile_picture={receiptInfos.picture} num={receiptInfos.num} />
