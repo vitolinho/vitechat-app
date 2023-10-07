@@ -22,7 +22,6 @@ const Header: React.FC<HeaderProperties> = ({ profile_picture, num }) => {
 
 const styles = StyleSheet.create({
   header: {
-    // marginTop: 60,
     width: "100%",
     justifyContent: "flex-end",
     padding: 20,
