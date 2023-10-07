@@ -1,36 +1,44 @@
-# TypeScript Example
 
-<p>
-  <!-- iOS -->
-  <img alt="Supports Expo iOS" longdesc="Supports Expo iOS" src="https://img.shields.io/badge/iOS-4630EB.svg?style=flat-square&logo=APPLE&labelColor=999999&logoColor=fff" />
-  <!-- Android -->
-  <img alt="Supports Expo Android" longdesc="Supports Expo Android" src="https://img.shields.io/badge/Android-4630EB.svg?style=flat-square&logo=ANDROID&labelColor=A4C639&logoColor=fff" />
-  <!-- Web -->
-  <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
+<h1 align='center'>Vitechat App</h1>
+
+<p align='center'>A react native app to send, received and delete messages.</p>
+
+<p align='center'>
+<a href='#installation'><strong>Installation</strong></a> .
+<a href='#functionalities'><strong>Functionalities</strong></a> .
+<a href='#tech-stack'><strong>Tech Stack</strong></a> .
+<a href='#author'><strong>Author</strong></a>
 </p>
+<br/>
 
-```sh
-npx create-react-native-app -t with-typescript
+## Installation
+
+```
+git clone https://github.com/vitolinho/vitechat-app.git
+```
+```
+cd .\vitechat-app\
+```
+```
+npm install
+```
+```
+npm run start
 ```
 
-TypeScript is a superset of JavaScript which gives you static types and powerful tooling in Visual Studio Code including autocompletion and useful inline warnings for type errors.
+## Functionalities
 
-## 🚀 How to use
+- Send a message
+- Receive an automatic message
+- Delete a message
+- Save the talk with asyncStorage
 
-#### Creating a new project
+## Tech Stack
 
-- Install the CLI: `npm i -g expo-cli`
-- Create a project: `npx create-react-native-app -t with-typescript`
-- `cd` into the project
+- [React Native](https://reactnative.dev/) Framework
+- [Typescript](https://www.typescriptlang.org) Language
+- Designed with [Figma](https://www.figma.com/)
 
-### Adding TypeScript to existing projects
+## Author
 
-- Create a blank TypeScript config: `touch tsconfig.json`
-- Run `yarn start` or `npm run start` to automatically configure TypeScript
-- Rename files to TypeScript, `.tsx` for React components and `.ts` for plain typescript files
-
-> 💡 You can disable the TypeScript setup in Expo CLI with the environment variable `EXPO_NO_TYPESCRIPT_SETUP=1 expo start`
-
-## 📝 Notes
-
-- [Expo TypeScript guide](https://docs.expo.dev/versions/latest/guides/typescript/)
+- My self ([@vitolinho](https://github.com/vitolinho))
