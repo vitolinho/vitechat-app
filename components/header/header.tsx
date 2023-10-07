@@ -22,15 +22,14 @@ const Header: React.FC<HeaderProperties> = ({ profile_picture, num }) => {
 
 const styles = StyleSheet.create({
   header: {
-    marginTop: 60,
+    // marginTop: 60,
     width: "100%",
-    justifyContent: "center",
-    height: 100,
+    justifyContent: "flex-end",
+    padding: 20,
+    height: 160,
     backgroundColor: "#fff",
   },
   infos: {
-    paddingLeft: 20,
-    paddingRight: 20,
     alignItems: "center",
     gap: 20,
     flexDirection: "row"
